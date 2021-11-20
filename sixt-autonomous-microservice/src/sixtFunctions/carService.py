@@ -5,7 +5,7 @@ def setVehicleForBooking(booking):
   #calculate distance user to available cars
   costumerPickUp = [booking.pickupLat, booking.pickupLng]
   costumerDestination = [booking.destinationLat, booking.destinationLng]
-  travelDist = getDistanceInKm(costumerPickUp, costumerDestination)
+  # travelDist = getDistanceInKm(costumerPickUp, costumerDestination)
 
   distanceToCars = []
   allVehicles = bookings.getAllVehicles()
@@ -16,5 +16,3 @@ def setVehicleForBooking(booking):
       latVehicle = coord.get('lat')
       lngVehicle = coord.get('lng')
 
-
-def getDistanceInKm(pickUp, destination):
