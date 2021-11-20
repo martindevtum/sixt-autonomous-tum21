@@ -28,7 +28,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 1rem 1rem;
 }
 .simulation-display__map {
   width:750px;

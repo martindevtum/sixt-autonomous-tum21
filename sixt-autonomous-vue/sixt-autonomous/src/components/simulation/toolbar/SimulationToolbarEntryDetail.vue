@@ -7,7 +7,17 @@
             <span class="simulation-toolbar-entry-detail__headline--text"> {{this.headline}} </span>
         </div>
         <div class="simulation-toolbar-entry-detail__info">
-            <div> {{}} </div>
+            <div class="simulation-toolbar-entry__wrapper--entry indented"> 
+                <span> <b> STATUS: </b> {{this.bookingStatus}}</span>
+            </div>
+            <div class="simulation-toolbar-entry__wrapper--entry indented"> 
+                <span> <b> PICKUP: </b> </span>
+                <span>{ long: {{this.bookingStart.long}}, lat: {{this.bookingStart.long}} }</span>
+            </div>
+            <div class="simulation-toolbar-entry__wrapper--entry indented"> 
+                <span> <b> DESTINATION: </b> </span>
+                <span>{ long: {{this.bookingEnd.long}}, lat: {{this.bookingEnd.long}} }</span>
+            </div>
         </div>
         <div class="simulation-toolbar-entry-detail__buttons">
             <button type="button" :disabled="isDisabledAssignVehicle"> Assign Vehicle </button>
@@ -43,6 +53,21 @@ export default {
       isDisabledAssignVehicle() {
         return !!this.booking.vehicleID;
       },
+      bookingStatus() {
+          return this.booking.status;
+      },
+      bookingStart() {
+          return {
+              long: this.booking.pickupLng,
+              lat: this.booking.pickupLat,
+          };
+      },
+      bookingEnd() {
+          return {
+              long: this.booking.destinationLng,
+              lat: this.booking.destinationLat,
+          };
+      }
   },
   methods: {
       onDeselectEntry() {

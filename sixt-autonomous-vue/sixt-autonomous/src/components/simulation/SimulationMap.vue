@@ -5,13 +5,20 @@
             :zoom="14"    
             :center="center"
         >
-            <gmap-marker
-                v-for="(m, index) in allVehiclePoints"
-                :key="index"
-                :position="m.position"
-                icon="sixt_car.png"
-                @click="center=m.position"
-            />
+        <gmap-marker
+            v-for="(m, index) in allVehiclePoints.free"
+            :key="index"
+            :position="m.position"
+            icon="sixt_car.png"                
+            @click="center=m.position"
+        />
+        <gmap-marker
+            v-for="(m, index) in allVehiclePoints.blocked"
+            :key="index"
+            :position="m.position"
+            icon="sixt_car_reserved.png"                
+            @click="center=m.position"
+        />
         </gmap-map>
     </div>
 </template>
@@ -33,18 +40,30 @@ export default {
   },
   computed: {
     allVehiclePoints() {
-      const allVehicles = [];
+      let allVehicles = {
+          free: [],
+          blocked: [],
+      };
+
       this.vehicles.forEach((vehicle) => {
-        allVehicles.push(
-          {
-            position: {
-                lat: vehicle.lat,
-                lng: vehicle.lng,
-            }
-          }
-        );
+        if (vehicle.status == 'FREE') {
+            allVehicles.free.push(
+            {
+                position: {
+                    lat: vehicle.lat,
+                    lng: vehicle.lng,
+                }
+            });
+        } else {
+            allVehicles.blocked.push(
+            {
+                position: {
+                    lat: vehicle.lat,
+                    lng: vehicle.lng,
+                }
+            });
+        }
       });
-      console.log(allVehicles);
       return allVehicles;
     }
   },
