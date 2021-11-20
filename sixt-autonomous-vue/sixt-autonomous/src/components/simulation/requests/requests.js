@@ -8,6 +8,7 @@ const getAllVehicles = async () => {
 };
 
 const getAllBookings = async () => {
+    console.log((await axios(`${SIXT_BASE_URL}/bookings`)).data.allBookings);
     return (await axios(`${SIXT_BASE_URL}/bookings`)).data.allBookings;
 };
 

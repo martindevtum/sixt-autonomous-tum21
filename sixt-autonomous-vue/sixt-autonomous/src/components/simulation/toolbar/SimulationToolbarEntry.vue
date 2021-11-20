@@ -78,7 +78,7 @@ export default {
     text-align: left;
 }
 .simulation-toolbar-entry__wrapper--entry {
-    color: #ffffff;
+    color: #dcdcdc;
 }
 h4 {
     margin: 0.5rem;

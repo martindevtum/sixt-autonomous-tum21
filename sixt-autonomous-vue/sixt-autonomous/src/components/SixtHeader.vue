@@ -31,6 +31,6 @@ h4 {
   margin: 1rem 0;
 }
 .sixt-text {
-    color: #ffffff;
+    color: #000000;
 }
 </style>

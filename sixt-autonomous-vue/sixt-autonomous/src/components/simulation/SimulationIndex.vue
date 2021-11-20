@@ -57,7 +57,7 @@ export default {
     width: 85%;
     height: 70%;
     max-height: 70vh;
-    background-color: #ffffff;
+    background-color: #dcdcdc;
 }
 .simulation-display {
     flex-grow: 3;

@@ -6,12 +6,17 @@
             </div>
             <span class="simulation-toolbar-entry-detail__headline--text"> {{this.headline}} </span>
         </div>
-        <button type="button">Assign Vehiucle</button>
-        <button type="button">Set Passenger Is On</button>
-        <button type="button">Set Passenger Is Off</button>
-        <button type="button">Set Passenger Is On</button>
-        <button type="button">Drive To Destination</button>
-        <button type="button">Delete Booking</button>
+        <div class="simulation-toolbar-entry-detail__info">
+            <div> {{}} </div>
+        </div>
+        <div class="simulation-toolbar-entry-detail__buttons">
+            <button type="button" :disabled="isDisabledAssignVehicle"> Assign Vehicle </button>
+            <button type="button" :disabled="isDisabledPassengerOnButton">Set Passenger Is On</button>
+            <button type="button" :disabled="isDisabledPassengerOffButton">Set Passenger Is Off</button>
+            <button type="button" :disabled="isDisabledDriveToDest">Drive To Destination</button>
+            <button type="button">Delete Booking</button>
+        </div>
+
     </div>
 
 </template>
@@ -22,17 +27,26 @@ export default {
   props: {
     booking: Object,
   },
-  mounted() {
-      console.log(this.booking);
-  },
   computed: {
       headline() {
-          return `Booking: ${this.booking.bookingID}`
-      }
+        return `Booking: ${this.booking.bookingID}`
+      },
+      isDisabledPassengerOnButton() {
+        return !this.booking.vehicleID;
+      },
+      isDisabledPassengerOffButton() {
+        return this.booking.status != 'STARTED';
+      },
+      isDisabledDriveToDest() {
+        return this.booking.status != "STARTED";
+      },
+      isDisabledAssignVehicle() {
+        return !!this.booking.vehicleID;
+      },
   },
   methods: {
       onDeselectEntry() {
-          this.$emit('on-deselect-entry');
+          this.$emit('on-deselect-entry');  
       }
   }
 }
@@ -58,13 +72,21 @@ export default {
     border-bottom-style: dashed;
     padding: .5rem;
     border-width: .5px;
-    border-color: #ffffff;
+    border-color: #dcdcdc;
 }
 
 .simulation-toolbar-entry-detail__headline--text {
-    color: #ffffff;
+    color: #dcdcdc;
     font-size: 21px;
 }
+
+.simulation-toolbar-entry-detail__info {
+    border-bottom-style: dashed;
+    padding: .5rem;
+    border-width: .5px;
+    border-color: #dcdcdc;
+}
+
 button {
     padding: .5rem;
     margin: .5rem;
