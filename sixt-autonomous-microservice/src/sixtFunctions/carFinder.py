@@ -1,8 +1,8 @@
 import googlemaps as gmaps
 from datetime import datetime
 
-import requests.sixtRequests.bookings as bookings
-import requests.sixtRequests.vehicles as vehicles
+import apiInterfaces.sixtRequests.bookings as bookings
+import apiInterfaces.sixtRequests.vehicles as vehicles
 
 def find_best_car(pickup_point):
     now = datetime.now()

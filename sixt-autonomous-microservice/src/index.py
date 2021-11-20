@@ -1,12 +1,12 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-import sys 
+import sys
 import os
-sys.path.append(os.path.abspath("requests/sixtRequests"))
+import json
 
-import bookings
-import vehicles
+import apiInterfaces.sixtRequests.bookings as bookings
+import apiInterfaces.sixtRequests.vehicles as vehicles
 
 # configuration
 DEBUG = True
@@ -25,11 +25,11 @@ def ping_pong():
 
 @app.route('/vehicles', methods=['GET'])
 def all_vehicles():
-    return { 'allVehicles': vehicles.getAllVehicles().json() }
+    return { 'allVehicles': json.dumps(vehicles.get_all()) }
 
 @app.route('/bookings', methods=['GET'])
 def all_bookings():
-    return { 'allBookings': bookings.getAllBookings().json() }
+   return { 'allBookings': json.dumps(bookings.get_all()) }
 
 if __name__ == '__main__':
     app.run()

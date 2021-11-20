@@ -35,4 +35,4 @@ def use_api(method, api_path, data=None):
     s = requests.Session()
     resp = s.send(r)
 
-    return json.loads(resp.text)
+    return resp.json()
