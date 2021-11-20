@@ -4,7 +4,7 @@ import time
 
 API_ENDPOINT = 'https://maps.googleapis.com/maps/api/distancematrix/json'
 
-with open('./src/requests/creds.json') as f:
+with open('config.json') as f:
     accessKey = json.load(f).get("api_key")
 
 """

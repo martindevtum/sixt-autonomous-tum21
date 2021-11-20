@@ -1,17 +1,15 @@
 import googlemaps as gmaps
 from datetime import datetime
 
-import src.requests.sixtRequests.bookings as bookings
-import src.requests.sixtRequests.vehicles as vehicles
+import requests.sixtRequests.bookings as bookings
+import requests.sixtRequests.vehicles as vehicles
 
 def find_best_car(pickup_point):
     now = datetime.now()
 
-    cars = vehicles.getAllVehicles()
+    cars = vehicles.get_all()
 
-    print('two')
     for i in range(0,len(cars),25):
-        print('one')
         cars_subset = cars[i:i+25]
         if cars_subset:
             for car in cars_subset:
