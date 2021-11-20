@@ -53,15 +53,22 @@ export default {
     position: relative;
     margin: auto;
     margin-top: 1rem;
-    margin-bottom: 1rem;
-    width: 90%;
-    height: 80%;
+    margin-bottom: 5rem;
+    width: 85%;
+    height: 70%;
+    max-height: 70vh;
     background-color: #ffffff;
 }
 .simulation-display {
-    flex-grow: 2;
+    flex-grow: 3;
+    max-height: 100%;
+    border-right-style: dotted;
+    border-right-width: 2px;
+    border-right-color: #EE7F00;
 }
 .simulation-toolbar {
     flex-grow: 1;
+    max-height: 100%;
+    overflow: scroll;
 }
 </style>

@@ -1,21 +1,19 @@
 <template>
     <div class="simulation-toolbar-entry__wrapper">
-        <h1> Booking </h1>
+        <h4> Booking </h4>
         <div class="simulation-toolbar-entry__wrapper--entry"> 
-            <p> ID: {{this.bookingId}}</p>
+            <span> ID: {{this.bookingId}}</span>
         </div>
         <div class="simulation-toolbar-entry__wrapper--entry"> 
-            <p> STATUS: {{this.bookingStatus}}</p>
+            <span> STATUS: {{this.bookingStatus}}</span>
         </div>
         <div class="simulation-toolbar-entry__wrapper--entry"> 
-            <p> PICKUP: </p>
-            <p> long: {{this.bookingStart.long}}</p>
-            <p> lat: {{this.bookingStart.long}}</p>
+            <span> PICKUP: </span>
+            <span>{ long: {{this.bookingStart.long}}, lat: {{this.bookingStart.long}} }</span>
         </div>
         <div class="simulation-toolbar-entry__wrapper--entry"> 
-            <p> DESTINATION: </p>
-            <p> long: {{this.bookingEnd.long}}</p>
-            <p> lat: {{this.bookingEnd.long}}</p>
+            <span> DESTINATION: </span>
+            <span>{ long: {{this.bookingEnd.long}}, lat: {{this.bookingEnd.long}} }</span>
         </div>
     </div>
 </template>
@@ -51,17 +49,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.simulation-display-entry__wrapper {
+.simulation-toolbar-entry__wrapper {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    margin: 1rem;
+    max-height: 25%;
+    margin: .5rem;
+    padding-left: .5rem;
     text-align: left;
-    border-width: 2px;
     background-color: #2F4858;
+    border-radius: 5px;
+    overflow: scroll;
+    cursor: pointer;
 }
 .simulation-toolbar-entry__wrapper--entry {
-    display: flex;
-    flex-direction: column;
+    color: #ffffff;
+}
+h4 {
+    margin: 0.5rem;
 }
 </style>

@@ -23,7 +23,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.simulation-display__wrapper {
-
+.simulation-toolbar__wrapper {
+  margin: .5rem;
 }
 </style>
