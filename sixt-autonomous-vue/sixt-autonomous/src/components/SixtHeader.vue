@@ -1,7 +1,7 @@
 <template>
     <div class="header-wrapper">
-        <h1 class='sixt-text'>{{ mainHeaderText }}</h1>
-        <h4 class='sixt-text'>{{ subHeaderText }}</h4>
+        <h1 class='sixt-text'> <b> {{ mainHeaderText }} </b> </h1>
+        <h4 class='sixt-text'> <b> {{ subHeaderText }} </b> </h4>
     </div>
 </template>
 
@@ -31,7 +31,6 @@ h4 {
   margin: 1rem 0;
 }
 .sixt-text {
-    font-weight: bold;
     color: #ffffff;
 }
 </style>

@@ -13,7 +13,7 @@ def updateVehicleLocationById(id, newLocation):
     return requests.post(f'https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api/vehicles/{id}/coordinates/', data=newLocation)
 
 # update vehicle location newCharge
-def updateVehicleLocationById(id, newCharge):
+def updateVehicleChargeById(id, newCharge):
     return requests.post(f'https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api/vehicles/{id}/charge/', data=newCharge)
 
 # block vehicle by id
