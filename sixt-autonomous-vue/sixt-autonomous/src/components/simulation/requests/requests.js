@@ -8,11 +8,15 @@ const getAllVehicles = async () => {
 };
 
 const getAllBookings = async () => {
-    console.log((await axios(`${SIXT_BASE_URL}/bookings`)).data.allBookings);
     return (await axios(`${SIXT_BASE_URL}/bookings`)).data.allBookings;
+};
+
+const deleteBookingById = async (id) => {
+    return (await axios.get(`${SIXT_BASE_URL}/bookings/delete/${id}`));
 };
 
 export {
     getAllVehicles,
     getAllBookings,
+    deleteBookingById,
 };

@@ -6,6 +6,11 @@
         v-if="!this.isEntryDetailView"
         class="simulation-toolbar__entry-list"
       >
+        <div
+          class="create-booking"
+          @click="onCreateBooking"
+        >
+        </div>
         <SimulationToolbarEntry 
           v-for="booking in allBookings" :key="booking.bookingID"
           :booking="booking"
@@ -51,6 +56,10 @@ export default {
     onDeselectEntry() {
       this.selectedBooking = {};
       this.isEntryDetailView = false;
+      this.$emit('on-force-refresh');
+    },
+    onCreateBooking() {
+
     }
   }
 }

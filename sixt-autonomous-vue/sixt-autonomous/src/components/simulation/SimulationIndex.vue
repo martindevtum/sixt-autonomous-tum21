@@ -5,12 +5,14 @@
             :vehicles='vehicles'
             :bookings='bookings'
             v-on:refresh-api='refreshApi'
+            @on-force-refresh="refreshApi"
         />
         <SimulationToolbar 
             class='simulation-toolbar'
             :allVehicles='vehicles'
             :allBookings='bookings'
             v-on:refresh-api='this.refreshApi'
+            @on-force-refresh="refreshApi"
         />
     </div>
 </template>

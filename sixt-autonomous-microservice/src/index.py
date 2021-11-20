@@ -1,8 +1,11 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
+from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 import json
 import apiInterfaces.sixtRequests.bookings as bookings
 import apiInterfaces.sixtRequests.vehicles as vehicles
+
+
+
 
 # configuration
 DEBUG = True
@@ -11,7 +14,6 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-# enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 # get all vehicles
@@ -26,6 +28,11 @@ def all_vehicles():
 @app.route('/bookings', methods=['GET'])
 def all_bookings():
    return { 'allBookings': bookings.get_all() }
+
+@app.route('/bookings/delete/<item_id>', methods=['GET'])
+def delete_booking(item_id):
+    bookings.delete(item_id)
+    return { 'message': 'success' } 
 
 if __name__ == '__main__':
     app.run()

@@ -17,7 +17,7 @@ export default {
     SimulationMap,
   },
   props: {
-    vehicles: Object,
+    vehicles: [],
   },
 }
 </script>

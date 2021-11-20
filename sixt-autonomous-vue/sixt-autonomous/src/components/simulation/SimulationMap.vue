@@ -7,14 +7,14 @@
         >
         <gmap-marker
             v-for="(m, index) in allVehiclePoints.free"
-            :key="index"
+            :key="`${index}_free`"
             :position="m.position"
             icon="sixt_car.png"                
             @click="center=m.position"
         />
         <gmap-marker
             v-for="(m, index) in allVehiclePoints.blocked"
-            :key="index"
+            :key="`${index}_blocked`"
             :position="m.position"
             icon="sixt_car_reserved.png"                
             @click="center=m.position"
@@ -27,7 +27,7 @@
 export default {
   name: 'SimulationMap',
   props: {
-    vehicles: Object,
+    vehicles: Array,
   },
   data() {
     return {

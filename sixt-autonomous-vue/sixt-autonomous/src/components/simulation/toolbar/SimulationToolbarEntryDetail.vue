@@ -20,22 +20,33 @@
             </div>
         </div>
         <div class="simulation-toolbar-entry-detail__buttons">
-            <button type="button" :disabled="isDisabledAssignVehicle"> Assign Vehicle </button>
+            <button type="button" :disabled="isDisabledAssignVehicle" @click="onAssignVehicle"> Assign Vehicle </button>
             <button type="button" :disabled="isDisabledPassengerOnButton">Set Passenger Is On</button>
             <button type="button" :disabled="isDisabledPassengerOffButton">Set Passenger Is Off</button>
             <button type="button" :disabled="isDisabledDriveToDest">Drive To Destination</button>
-            <button type="button">Delete Booking</button>
+            <button type="button" @click="onDeleteBooking">Delete Booking</button>
         </div>
-
+        <TinderSelection v-if="isTinderSelectionViewing"/>
     </div>
-
 </template>
 
 <script>
+import TinderSelection from './../TinderSelection.vue';
+import {
+    deleteBookingById
+} from './../requests/requests';
 export default {
   name: 'SimulationToolbarEntryDetail',
   props: {
     booking: Object,
+  },
+  data() {
+      return {
+        isTinderSelectionViewing: false,
+      };
+  },
+  components: {
+      TinderSelection,
   },
   computed: {
       headline() {
@@ -72,7 +83,17 @@ export default {
   methods: {
       onDeselectEntry() {
           this.$emit('on-deselect-entry');  
-      }
+      },
+      onAssignVehicle() {
+          this.isTinderSelectionViewing = true;
+      },
+      async onDeleteBooking() {
+          if (this.booking.vehicleID) {
+            // freeVehicleWithId(vehicleID);
+          }
+          await deleteBookingById(this.booking.bookingID);
+          this.onDeselectEntry()
+      },
   }
 }
 </script>
