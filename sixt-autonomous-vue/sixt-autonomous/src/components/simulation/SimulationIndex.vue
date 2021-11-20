@@ -2,8 +2,8 @@
     <div class="simulation-wrapper">
         <SimulationDisplay 
             class='simulation-display'
-            :allVehicles='vehicles'
-            :allBookings='bookings'
+            :vehicles='vehicles'
+            :bookings='bookings'
             v-on:refresh-api='refreshApi'
         />
         <SimulationToolbar 

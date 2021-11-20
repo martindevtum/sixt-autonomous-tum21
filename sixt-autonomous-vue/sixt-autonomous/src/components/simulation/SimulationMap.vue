@@ -6,9 +6,10 @@
             :center="center"
         >
             <gmap-marker
+                v-for="(m, index) in allVehiclePoints"
                 :key="index"
-                v-for="(m, index) in locationMarkers"
                 :position="m.position"
+                icon="sixt_car.png"
                 @click="center=m.position"
             />
         </gmap-map>
@@ -27,22 +28,23 @@ export default {
         lat: 48.137154,
         lng: 11.576124,
       },
-      locationMarkers: [],
-      locPlaces: [],
       existingPlace: null
     };
   },
-
   computed: {
-    getAllVehiclePoints() {
+    allVehiclePoints() {
       const allVehicles = [];
       this.vehicles.forEach((vehicle) => {
         allVehicles.push(
           {
-            positionString: `q=${vehicle.lat}%2C${vehicle.long}`,
+            position: {
+                lat: vehicle.lat,
+                lng: vehicle.lng,
+            }
           }
         );
       });
+      console.log(allVehicles);
       return allVehicles;
     }
   },

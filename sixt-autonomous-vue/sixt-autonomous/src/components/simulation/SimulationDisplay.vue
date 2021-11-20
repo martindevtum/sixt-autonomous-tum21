@@ -19,19 +19,6 @@ export default {
   props: {
     vehicles: Object,
   },
-  computed: {
-    getAllVehiclePoints() {
-      const allVehicles = [];
-      this.vehicles.forEach((vehicle) => {
-        allVehicles.push(
-          {
-            positionString: `q=${vehicle.lat}%2C${vehicle.long}`,
-          }
-        );
-      });
-      return allVehicles;
-    }
-  },
 }
 </script>
 
