@@ -1,28 +1,41 @@
 import requests
+import json
+
+with open('config.json') as f:
+    api_endpoint = json.load(f).get("api_endpoint")
 
 # get all bookings
-def getAllBookings():
-    return requests.get('https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api/bookings')
+def get_all():
+    return use_api('GET', f'bookings')
 
 # get booking by id
-def getBookingById(id):
-    return requests.get(f'https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api/bookings/{id}')
+def get_by_id(id):
+    return use_api('GET', f'bookings/{id}')
 
 # create a booking
-def createBooking(booking):
-    return requests.post('https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api/bookings', data=booking)
+def create(booking):
+    return use_api('POST', f'bookings', data=booking)
 
 # delete booking
-def deleteBookingById(id):
-    return requests.delete(f'https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api/bookings/{id}')
+def delete(id):
+    return use_api('DELETE', f'bookings/{id}')
 
 # assign vehicle to booking
-def assignVehicleToBookingById(bookingId, vehicleId):
-    return requests.post(f'https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api//bookings/{bookingId}/assignVehicle/{vehicleId}') 
+def assign(vehicleId, bookingId):
+    return use_api('POST', f'bookings/{bookingId}/assignVehicle/{vehicleId}')
 
 # set passenger is on
-def setPassengerIsOnById(id):
-    return requests.post(f'https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api//bookings/{id}/passengerGotOn')
+def passenger_got_on(id):
+    return use_api('POST', f'bookings/{id}/passengerGotOn')
 
-def setPassengerIsOffById(id):
-    return requests.post(f'https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api//bookings/{id}/passengerGotOff')
+def passenger_got_off(id):
+    return use_api('POST', f'bookings/{id}/passengerGotOff')
+
+def use_api(method, api_path, data=None):
+    req = requests.Request(method, f'{api_endpoint}/{api_path}', data=data)
+    r = req.prepare()
+
+    s = requests.Session()
+    resp = s.send(r)
+
+    return resp.json
