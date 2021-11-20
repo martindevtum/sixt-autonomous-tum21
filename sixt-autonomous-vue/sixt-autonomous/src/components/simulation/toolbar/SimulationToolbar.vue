@@ -15,8 +15,8 @@ export default {
     SimulationToolbarEntry,
   },
   props: {
-    allVehicles: Object,
-    allBookings: Object,
+    allVehicles: Array,
+    allBookings: Array,
   },
 }
 </script>

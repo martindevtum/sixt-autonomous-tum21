@@ -2,14 +2,14 @@
     <div class="simulation-wrapper">
         <SimulationDisplay 
             class='simulation-display'
-            :allVehicles='allVehicles'
-            :allBookings='allBookings'
+            :allVehicles='vehicles'
+            :allBookings='bookings'
             v-on:refresh-api='refreshApi'
         />
         <SimulationToolbar 
             class='simulation-toolbar'
-            :allVehicles='allVehicles'
-            :allBookings='allBookings'
+            :allVehicles='vehicles'
+            :allBookings='bookings'
             v-on:refresh-api='this.refreshApi'
         />
     </div>
@@ -34,13 +34,13 @@ export default {
         vehicles:[],
       }
   },
-  mounted() {
-      this.refreshApi();
+  async mounted() {
+      await this.refreshApi();
   },
   methods: {
-      refreshApi() {
-        this.bookings = getAllBookings(); 
-        this.vehicles = getAllVehicles(); 
+      async refreshApi() {
+        this.bookings = await getAllBookings(); 
+        this.vehicles = await getAllVehicles(); 
       },
   }
 }

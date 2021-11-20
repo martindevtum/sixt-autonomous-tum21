@@ -1,7 +1,7 @@
 import requests
 
 # get all bookings
-def getAllbookings():
+def getAllBookings():
     return requests.get('https://us-central1-sixt-hackatum-2021.cloudfunctions.net/api/bookings')
 
 # get booking by id

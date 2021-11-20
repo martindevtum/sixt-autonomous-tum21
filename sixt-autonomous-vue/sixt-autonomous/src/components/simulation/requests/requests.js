@@ -4,11 +4,11 @@ import {
 } from './../../../config/web-api-config';
 
 const getAllVehicles = async () => {
-    return await axios(`${SIXT_BASE_URL}/vehicles`);
+    return (await axios(`${SIXT_BASE_URL}/vehicles`)).data.allVehicles;
 };
 
 const getAllBookings = async () => {
-    return await axios(`${SIXT_BASE_URL}/bookings`);
+    return (await axios(`${SIXT_BASE_URL}/bookings`)).data.allBookings;
 };
 
 export {

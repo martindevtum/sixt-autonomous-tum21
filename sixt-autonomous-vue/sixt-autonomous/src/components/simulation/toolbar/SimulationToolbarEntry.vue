@@ -2,7 +2,7 @@
     <div class="simulation-toolbar-entry__wrapper">
         <h1> Booking </h1>
         <div class="simulation-toolbar-entry__wrapper--entry"> 
-            <p> ID: {{this.bookingID}}</p>
+            <p> ID: {{this.bookingId}}</p>
         </div>
         <div class="simulation-toolbar-entry__wrapper--entry"> 
             <p> STATUS: {{this.bookingStatus}}</p>
@@ -31,7 +31,7 @@ export default {
           return this.booking.bookingID;
       },
       bookingStatus() {
-          return this.booking.bookingStatus;
+          return this.booking.status;
       },
       bookingStart() {
           return {
