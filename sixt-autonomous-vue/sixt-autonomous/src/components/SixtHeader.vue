@@ -10,8 +10,8 @@ export default {
   name: 'SixtHeader',
   data(){
       return {
-          mainHeaderText: 'Sixt autonomous vehicle simulator',
-          subHeaderText: 'simulation for autonomous taxis'
+          mainHeaderText: 'SIXT ROBOTAXI SIMULATOR',
+          subHeaderText: 'SIMULATION FOR AUTONOMOUS TAXIS'
       }
   }
 }
@@ -26,9 +26,15 @@ export default {
 }
 h1 {
   margin: 1rem 0;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 48px;
 }
 h4 {
   margin: 1rem 0;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 25px;
 }
 .sixt-text {
     color: #000000;

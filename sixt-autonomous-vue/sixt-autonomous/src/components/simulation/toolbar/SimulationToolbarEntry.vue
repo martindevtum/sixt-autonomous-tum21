@@ -37,16 +37,16 @@ export default {
           return this.booking.status;
       },
       bookingStart() {
-          return {
-              long: this.booking.pickupLng,
-              lat: this.booking.pickupLat,
-          };
+        return {
+            long: this.booking.pickupLng,
+            lat: this.booking.pickupLat,
+        };
       },
       bookingEnd() {
-          return {
-              long: this.booking.destinationLng,
-              lat: this.booking.destinationLat,
-          };
+        return {
+            long: this.booking.destinationLng,
+            lat: this.booking.destinationLat,
+        };
       }
   },
   methods: {

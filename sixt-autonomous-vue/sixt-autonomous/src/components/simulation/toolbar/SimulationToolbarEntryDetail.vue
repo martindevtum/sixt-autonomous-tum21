@@ -26,14 +26,20 @@
             <button type="button" :disabled="isDisabledDriveToDest">Drive To Destination</button>
             <button type="button" @click="onDeleteBooking">Delete Booking</button>
         </div>
-        <TinderSelection v-if="isTinderSelectionViewing"/>
+        <TinderSelection 
+            v-if="isTinderSelectionViewing"
+            :queue="tinderArray"
+            :booking="booking"
+            @on-force-refresh="onDeselectEntry"
+        />
     </div>
 </template>
 
 <script>
 import TinderSelection from './../TinderSelection.vue';
 import {
-    deleteBookingById
+    deleteBookingById,
+    getBestVehicles,
 } from './../requests/requests';
 export default {
   name: 'SimulationToolbarEntryDetail',
@@ -43,6 +49,8 @@ export default {
   data() {
       return {
         isTinderSelectionViewing: false,
+        bestVehicles: [],
+        tinderArray: [],
       };
   },
   components: {
@@ -82,10 +90,36 @@ export default {
   },
   methods: {
       onDeselectEntry() {
-          this.$emit('on-deselect-entry');  
+          this.$emit('on-deselect-entry');
       },
-      onAssignVehicle() {
-          this.isTinderSelectionViewing = true;
+      async onAssignVehicle() {
+        this.bestVehicles = await getBestVehicles(this.booking);
+        console.log(this.bestVehicles);
+
+        this.tinderArray = [
+            {
+                id: 0,
+                img: 'car1.png',
+                vehicle: this.bestVehicles[0],
+            },
+            {
+                id: 1,
+                img: 'car2.png',
+                vehicle: this.bestVehicles[1],
+            },
+            {
+                id: 2,
+                img: 'car3.png',
+                vehicle: this.bestVehicles[2],
+            },
+            {
+                id: 3,
+                img: 'car4.png',
+                vehicle: this.bestVehicles[3],
+            }
+        ];
+
+        this.isTinderSelectionViewing = true;
       },
       async onDeleteBooking() {
           if (this.booking.vehicleID) {

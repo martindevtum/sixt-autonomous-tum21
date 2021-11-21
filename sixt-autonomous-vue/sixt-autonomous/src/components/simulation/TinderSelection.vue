@@ -5,12 +5,10 @@
     :queue.sync="queue"
     @submit="onSubmit"
   >
-    <div
-        slot-scope="scope"
-        :style="{
-            'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`
-        }"
-    />
+    <div>
+      <img class="profile-pic" :src="currentObj.img">
+    </div>
+
     <img slot="like" src="icon_like.png" />
     <img slot="nope" src="icon_dislike.png" />
   </VueTinder>
@@ -18,20 +16,43 @@
 
 <script>
 import VueTinder from 'vue-tinder'
-
+import {
+  assignVehicleToBooking
+} from './requests/requests';
 export default {
   components: {
     VueTinder
   },
-  props: {
-    carMatches,
-  },
   data() {
-    return {}
+    return {
+      currentObj: this.queue[0],
+      currentInd: 0,
+    };
+  },
+  props: {
+    queue: Array,
+    booking: Object,
   },
   methods: {
     onSubmit(choice) {
-
+      if (choice.type == 'nope') {
+        if (this.currentInd < this.queue.length - 1) {
+          this.currentInd = this.currentInd + 1;
+          this.currentObj = this.queue[this.currentInd];
+        } else {
+          this.endTinder();
+        }
+      } else if (choice.type == 'like') {
+        console.log(this.currentObj);
+        this.endTinderSuccess();
+      }
+    },
+    endTinderSuccess() {
+      assignVehicleToBooking(this.booking.bookingID, this.currentObj.vehicle.vehicleID);
+      this.endTinder();
+    },
+    endTinder() {
+      this.$emit('on-force-refresh');
     },
   }
 }
@@ -45,5 +66,13 @@ export default {
     width: 250px;
     height: 400px;
     top: 20%;
+}
+
+.profile-pic {
+    position: fixed;
+    left:0px;
+    top: 100px;
+    width: 100%;
+    height: auto;
 }
 </style>

@@ -3,7 +3,7 @@ from flask_cors import CORS, cross_origin
 import json
 import apiInterfaces.sixtRequests.bookings as bookings
 import apiInterfaces.sixtRequests.vehicles as vehicles
-
+import sixtFunctions.carFinder as carFinder
 
 
 
@@ -39,6 +39,15 @@ def create_booking():
     post_data = request.get_json()
     bookings.create(post_data)
     return { 'message': 'success' } 
+
+@app.route('/bookings/<booking_id>/assignVehicle/<vehicle_id>', methods=['POST'])
+def assign_vehicle_to_booking(booking_id, vehicle_id):
+    bookings.assign(vehicle_id, booking_id)
+    return { 'message': 'success' } 
+
+@app.route('/bookings/vehicles/<pickupPoint>', methods=['GET'])
+def get_vehicles_for_booking(pickupPoint):
+    return { 'bestVehicles': carFinder.find_best_cars(pickupPoint) }
 
 if __name__ == '__main__':
     app.run()

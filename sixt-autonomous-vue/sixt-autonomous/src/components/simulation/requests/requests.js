@@ -19,9 +19,22 @@ const createBooking = async (booking) => {
     return (await axios.post(`${SIXT_BASE_URL}/bookings/create`, booking))
 };
 
+const getBestVehicles = async (booking) => {
+    const pickupPoint = `${booking.pickupLat},${booking.pickupLng}`;
+    return (await axios(`${SIXT_BASE_URL}/bookings/vehicles/${pickupPoint}`)).data.bestVehicles;
+};
+
+const assignVehicleToBooking = async (booking_id, vehicle_id) => {
+    console.log(booking_id);
+    console.log(vehicle_id);
+    return (await axios.post(`${SIXT_BASE_URL}/bookings/${booking_id}/assignVehicle/${vehicle_id}`))
+}
+
 export {
     getAllVehicles,
     getAllBookings,
     deleteBookingById,
     createBooking,
+    getBestVehicles,
+    assignVehicleToBooking,
 };

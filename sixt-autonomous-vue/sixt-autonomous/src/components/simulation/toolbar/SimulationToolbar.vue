@@ -10,7 +10,7 @@
           class="create-booking"
           @click="onCreateBooking"
         >
-          <CreateNewBooking @on-force-refresh="$emit('on-force-refresh')" />
+        <CreateNewBooking @on-force-refresh="$emit('on-force-refresh')" />
         </div>
         <SimulationToolbarEntry 
           v-for="booking in allBookings" :key="booking.bookingID"
