@@ -21,8 +21,8 @@
         </div>
         <div class="simulation-toolbar-entry-detail__buttons">
             <button type="button" :disabled="isDisabledAssignVehicle" @click="onAssignVehicle"> Assign Vehicle </button>
-            <button type="button" :disabled="isDisabledPassengerOnButton">Set Passenger Is On</button>
-            <button type="button" :disabled="isDisabledPassengerOffButton">Set Passenger Is Off</button>
+            <button type="button" :disabled="isDisabledPassengerOnButton" @click="onGetOnVehicle">Set Passenger Is On</button>
+            <button type="button" :disabled="isDisabledPassengerOffButton" @click="onGetOffVehicle">Set Passenger Is Off</button>
             <button type="button" :disabled="isDisabledDriveToDest">Drive To Destination</button>
             <button type="button" @click="onDeleteBooking">Delete Booking</button>
         </div>
@@ -40,6 +40,8 @@ import TinderSelection from './../TinderSelection.vue';
 import {
     deleteBookingById,
     getBestVehicles,
+    passengerGotOff,
+    passengerGotOn,
 } from './../requests/requests';
 export default {
   name: 'SimulationToolbarEntryDetail',
@@ -61,7 +63,7 @@ export default {
         return `Booking: ${this.booking.bookingID}`
       },
       isDisabledPassengerOnButton() {
-        return !this.booking.vehicleID;
+        return this.booking.status != 'VEHICLE_ASSIGNED';
       },
       isDisabledPassengerOffButton() {
         return this.booking.status != 'STARTED';
@@ -94,40 +96,38 @@ export default {
       },
       async onAssignVehicle() {
         this.bestVehicles = await getBestVehicles(this.booking);
-        console.log(this.bestVehicles);
 
-        this.tinderArray = [
-            {
-                id: 0,
-                img: 'car1.png',
-                vehicle: this.bestVehicles[0],
-            },
-            {
-                id: 1,
-                img: 'car2.png',
-                vehicle: this.bestVehicles[1],
-            },
-            {
-                id: 2,
-                img: 'car3.png',
-                vehicle: this.bestVehicles[2],
-            },
-            {
-                id: 3,
-                img: 'car4.png',
-                vehicle: this.bestVehicles[3],
-            }
-        ];
-
-        this.isTinderSelectionViewing = true;
+        const arr = [];
+        for (let i = 0; i < 4 && i < this.bestVehicles.length; i = i + 1) {
+            arr.push({
+                id: i,
+                img: `car${i+1}.png`,
+                vehicle: this.bestVehicles[i],
+            });
+        }
+        
+        if (this.bestVehicles.length) {
+            this.tinderArray = arr;
+            this.isTinderSelectionViewing = true;
+        } else {
+            alert('no car was found');
+        }
       },
       async onDeleteBooking() {
           if (this.booking.vehicleID) {
             // freeVehicleWithId(vehicleID);
           }
           await deleteBookingById(this.booking.bookingID);
-          this.onDeselectEntry()
+          this.onDeselectEntry();
       },
+      async onGetOnVehicle() {
+          await passengerGotOn(this.booking.bookingID);
+          this.onDeselectEntry();
+      },
+      async onGetOffVehicle() {
+            await passengerGotOff(this.booking.bookingID);
+            this.onDeselectEntry();
+      }
   }
 }
 </script>

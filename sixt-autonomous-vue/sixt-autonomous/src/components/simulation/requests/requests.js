@@ -8,6 +8,7 @@ const getAllVehicles = async () => {
 };
 
 const getAllBookings = async () => {
+    console.log((await axios(`${SIXT_BASE_URL}/bookings`)).data.allBookings);
     return (await axios(`${SIXT_BASE_URL}/bookings`)).data.allBookings;
 };
 
@@ -24,6 +25,14 @@ const getBestVehicles = async (booking) => {
     return (await axios(`${SIXT_BASE_URL}/bookings/vehicles/${pickupPoint}`)).data.bestVehicles;
 };
 
+const passengerGotOn = async (booking) => {
+    return (await axios.post(`${SIXT_BASE_URL}/bookings/${booking}/passengerGotOn`))
+};
+
+const passengerGotOff = async (booking) => {
+    return (await axios.post(`${SIXT_BASE_URL}/bookings/${booking}/passengerGotOff`))
+};
+
 const assignVehicleToBooking = async (booking_id, vehicle_id) => {
     console.log(booking_id);
     console.log(vehicle_id);
@@ -37,4 +46,6 @@ export {
     createBooking,
     getBestVehicles,
     assignVehicleToBooking,
+    passengerGotOff,
+    passengerGotOn,
 };

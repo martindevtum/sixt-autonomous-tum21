@@ -7,6 +7,9 @@
   >
     <div>
       <img class="profile-pic" :src="currentObj.img">
+      <div class="profile-text"> 
+          <p> ready in: {{ parseInt(currentObj.vehicle.duration / 60) }} minutes </p>
+      </div>
     </div>
 
     <img slot="like" src="icon_like.png" />
@@ -47,8 +50,8 @@ export default {
         this.endTinderSuccess();
       }
     },
-    endTinderSuccess() {
-      assignVehicleToBooking(this.booking.bookingID, this.currentObj.vehicle.vehicleID);
+    async endTinderSuccess() {
+      await assignVehicleToBooking(this.booking.bookingID, this.currentObj.vehicle.vehicleID);
       this.endTinder();
     },
     endTinder() {
@@ -74,5 +77,12 @@ export default {
     top: 100px;
     width: 100%;
     height: auto;
+}
+
+.profile-text {
+  position: fixed;
+  bottom: 40px;
+  left: 20%;
+  color: #000000
 }
 </style>

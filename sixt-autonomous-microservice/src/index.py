@@ -45,6 +45,16 @@ def assign_vehicle_to_booking(booking_id, vehicle_id):
     bookings.assign(vehicle_id, booking_id)
     return { 'message': 'success' } 
 
+@app.route('/bookings/<booking_id>/passengerGotOn', methods=['POST'])
+def passenger_got_on(booking_id):
+    bookings.passenger_got_on(booking_id)
+    return { 'message': 'success' } 
+
+@app.route('/bookings/<booking_id>/passengerGotOff', methods=['POST'])
+def passenger_got_off(booking_id):
+    bookings.passenger_got_off(booking_id)
+    return { 'message': 'success' } 
+
 @app.route('/bookings/vehicles/<pickupPoint>', methods=['GET'])
 def get_vehicles_for_booking(pickupPoint):
     return { 'bestVehicles': carFinder.find_best_cars(pickupPoint) }
