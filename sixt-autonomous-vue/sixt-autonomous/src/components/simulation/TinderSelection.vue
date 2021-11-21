@@ -3,6 +3,7 @@
     id="tinder-select"
     key-name="id"
     :queue.sync="queue"
+    @submit="onSubmit"
   >
     <div
         slot-scope="scope"
@@ -22,15 +23,16 @@ export default {
   components: {
     VueTinder
   },
-    data() {
-        return {
-            queue: [{
-            // key: 1 （If you do not set the key-name, the 'key' will be used by default. Please ensure that it exists and is independent）
-                id: 1
-            }, {
-                id: 2
-            }]
-        }
+  props: {
+    carMatches,
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    onSubmit(choice) {
+
+    },
   }
 }
 </script>
