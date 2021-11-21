@@ -30,7 +30,24 @@ def find_best_cars(pickup_point):
         else:
             break
 
+    distance_results = list(filter(lambda x: check_availability(x) & check_charge(x), distance_results))
+    list.sort(distance_results, key=lambda x: x['duration'])
+
+    for x in distance_results:
+        print(x)
+
     return distance_results
+
+def check_availability(car):
+    return car['status'] == 'FREE'
+
+def check_charge(car, distance_to_customer_dest=0):
+    PERCENT_PER_M = 100/550000
+    RESERVE = 10
+
+    needed_charge = (car['distance'] + distance_to_customer_dest) * PERCENT_PER_M + RESERVE
+
+    return needed_charge <= float(car['charge'])
 
 def formatLatLon(car):
     return f'{car.get("lat")},{car.get("lng")}'
