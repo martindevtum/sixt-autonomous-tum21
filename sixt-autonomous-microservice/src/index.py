@@ -34,5 +34,11 @@ def delete_booking(item_id):
     bookings.delete(item_id)
     return { 'message': 'success' } 
 
+@app.route('/bookings/create', methods=['POST'])
+def create_booking():
+    post_data = request.get_json()
+    bookings.create(post_data)
+    return { 'message': 'success' } 
+
 if __name__ == '__main__':
     app.run()

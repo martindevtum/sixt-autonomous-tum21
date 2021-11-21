@@ -10,6 +10,7 @@
           class="create-booking"
           @click="onCreateBooking"
         >
+          <CreateNewBooking @on-force-refresh="$emit('on-force-refresh')" />
         </div>
         <SimulationToolbarEntry 
           v-for="booking in allBookings" :key="booking.bookingID"
@@ -32,11 +33,13 @@
 <script>
 import SimulationToolbarEntry from './SimulationToolbarEntry.vue';
 import SimulationToolbarEntryDetail from './SimulationToolbarEntryDetail.vue';
+import CreateNewBooking from './CreateNewBooking.vue';
 export default {
   name: 'SimulationToolbar',
   components: {
     SimulationToolbarEntry,
     SimulationToolbarEntryDetail,
+    CreateNewBooking,
   },
   data() {
     return {

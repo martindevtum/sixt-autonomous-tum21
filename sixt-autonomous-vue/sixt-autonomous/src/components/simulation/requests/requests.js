@@ -15,8 +15,13 @@ const deleteBookingById = async (id) => {
     return (await axios.get(`${SIXT_BASE_URL}/bookings/delete/${id}`));
 };
 
+const createBooking = async (booking) => {
+    return (await axios.post(`${SIXT_BASE_URL}/bookings/create`, booking))
+};
+
 export {
     getAllVehicles,
     getAllBookings,
     deleteBookingById,
+    createBooking,
 };

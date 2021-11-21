@@ -32,10 +32,8 @@ def passenger_got_off(id):
     return use_api('POST', f'bookings/{id}/passengerGotOff')
 
 def use_api(method, api_path, data=None):
-    req = requests.Request(method, f'{api_endpoint}/{api_path}', data=data)
+    req = requests.Request(method, f'{api_endpoint}{api_path}', data=data)
     r = req.prepare()
-
     s = requests.Session()
     resp = s.send(r)
-
     return resp.json()
